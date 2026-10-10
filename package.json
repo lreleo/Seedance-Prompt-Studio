@@ -1,0 +1,11 @@
+{
+  "name": "seedance-prompt-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check case-originals.js && node --check ai-settings.js && node --check public/app-v2.js && node --check public/cases.js && node --check public/vocabulary.js && node --test"
+  },
+  "engines": { "node": ">=20" }
+}
