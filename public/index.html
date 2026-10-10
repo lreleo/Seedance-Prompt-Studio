@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#eef2f6" />
+  <title>画面语法 · 提示词工作台</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand" aria-label="画面语法 提示词工作台"><span class="brand-mark"><i></i><i></i><i></i></span><span><b>画面语法</b><small>PROMPT STUDIO</small></span></div>
+      <div class="header-center"><span class="header-dot"></span> 从想法到镜头语言 <span class="header-line"></span> Seedance 视频提示词工作台</div>
+      <div class="header-actions"><span id="saveStatus" class="save-status">草稿已保存</span><button id="examplesBtn" class="button ghost" type="button">案例库</button><button id="settingsBtn" class="button ghost icon-button" type="button" aria-label="数据与 AI 设置">⚙</button></div>
+    </header>
+
+    <div class="mobile-tabs" role="tablist" aria-label="工作区"><button class="mobile-tab active" data-view="library" role="tab" aria-selected="true">词汇</button><button class="mobile-tab" data-view="editor" role="tab" aria-selected="false">撰写</button><button class="mobile-tab" data-view="preview" role="tab" aria-selected="false">预览</button></div>
+
+    <div class="workspace">
+      <aside class="library pane mobile-active" data-pane="library" aria-label="专业词汇库">
+        <div class="pane-heading"><div><span class="eyebrow">THE VOCABULARY</span><h1>镜头词典<span class="heading-spark">✦</span></h1><p>找到合适的词，再把它放进画面里。</p></div><span id="wordCount" class="count-badge"></span></div>
+        <label class="searchbox"><span>⌕</span><input id="searchInput" type="search" placeholder="搜索镜头、光线、风格…" autocomplete="off" /><kbd>⌘ K</kbd></label>
+        <label class="category-select">词汇分类<select id="categoryNav" aria-label="词汇类别"></select></label>
+        <label class="term-target">勾选加入到<select id="termTarget" aria-label="词汇加入目标"></select></label>
+        <div class="library-toolbar"><span id="libraryTitle">全部词汇</span><button id="favoritesFilter" class="text-button" type="button" aria-pressed="false">☆ 收藏</button></div>
+        <div id="vocabList" class="vocab-list"></div>
+        <button id="customTermBtn" class="add-term" type="button"><span>＋</span> 添加自定义词条</button>
+        <div class="library-foot">术语用于描述预期画面。设备型号与参数仅作风格参考。</div>
+      </aside>
+
+      <main class="editor pane" data-pane="editor">
+        <div class="editor-top"><div><span class="eyebrow">THE WORKSPACE / 01</span><h2>让画面有章可循。</h2><p>先写下想拍什么，再逐层补上镜头、光、声音与节奏。</p></div><div class="editor-top-actions"><button id="newDraftBtn" class="button ghost" type="button">新建草稿</button><span class="draft-indicator">● 自动保存</span></div></div>
+        <section class="idea-card"><div class="section-meta"><span class="step-label">START HERE</span><span class="meta-tip">一句话的创意也足够开始</span></div><label for="ideaInput" class="field-title">你想拍什么？</label><textarea id="ideaInput" rows="3" placeholder="例如：雨夜街头，一位舞者追逐被风吹走的红色丝带…"></textarea><div class="idea-actions"><button id="aiBreakdownBtn" class="button ai-button" type="button">✦ AI 拆解创意</button><span>AI 建议会先供你预览，确认后才加入草稿</span></div></section>
+        <section class="base-card"><div class="section-title-row"><div><span class="eyebrow">FOUNDATION</span><h3>基础设定</h3></div><span class="section-helper">决定画布与生成方式</span></div><div class="base-grid"><label>画面比例<select id="aspectInput"><option value="16:9 横屏">16:9 横屏</option><option value="9:16 竖屏">9:16 竖屏</option><option value="1:1 方形">1:1 方形</option><option value="4:3 复古画幅">4:3 复古画幅</option><option value="2.39:1 宽银幕">2.39:1 宽银幕</option></select></label><label>时长（秒）<input id="durationInput" type="number" min="1" max="300" value="15" /></label><label>生成方式<select id="modeInput"><option value="文生视频">文生视频</option><option value="图生视频">图生视频</option><option value="首尾帧视频">首尾帧视频</option><option value="多参考素材视频">多参考素材视频</option></select></label><label>画面质感<select id="qualityInput"><option value="自然真实">自然真实</option><option value="电影质感">电影质感</option><option value="广告级精致">广告级精致</option><option value="手持纪实">手持纪实</option><option value="风格化动画">风格化动画</option></select></label></div><label class="wide-field">参考素材及用途<input id="referenceInput" type="text" placeholder="例如：@图片1 只用于人物身份；@图片2 只用于场景布局" /></label><label class="wide-field">补充你的要求<textarea data-field="basic" data-scope="shared" rows="2" placeholder="例如：单镜头连续拍摄；画面中不出现字幕"></textarea></label><div id="basicPicker"></div></section>
+        <div class="section-title-row modules-heading"><div><span class="eyebrow">GLOBAL DIRECTION</span><h3>全片共通设定</h3></div><span class="section-helper">只写贯穿所有镜头的要求</span></div>
+        <div id="moduleList" class="module-list"></div>
+        <section class="timeline-section"><div class="section-title-row"><div><span class="eyebrow">SHOT BY SHOT</span><h3>逐镜头画面构成</h3></div><button id="addShotBtn" class="button secondary" type="button">＋ 添加镜头</button></div><p class="timeline-intro">每张镜头卡各自决定画面、摄影、光影和声音；转场写在前一镜头的末尾。</p><div id="timelineWarnings" class="warnings" aria-live="polite"></div><div id="shotList" class="shot-list"></div></section>
+      </main>
+
+      <aside class="preview pane" data-pane="preview" aria-label="提示词预览"><div class="preview-top"><div><span class="eyebrow">LIVE OUTPUT / 02</span><h2>完整提示词</h2><p>把所有选择串成一段可直接使用的描述。</p></div><span id="previewWordCount" class="preview-count">0 字</span></div><div class="preview-actions"><button id="copyBtn" class="button primary" type="button">复制提示词 ↗</button><button id="downloadBtn" class="button secondary" type="button">下载 TXT</button></div><div class="preview-content"><div class="preview-caption"><span class="preview-orbit">◉</span> PROMPT PREVIEW <button id="resetPreviewBtn" class="text-button" type="button" hidden>重新生成</button></div><textarea id="previewText" spellcheck="false" aria-label="最终提示词，可直接编辑" placeholder="你的提示词将在这里出现。先写下一个画面想法，或从词典中添加表达。"></textarea></div><div class="preview-bottom"><button id="aiOptimizeBtn" class="button ai-button full" type="button">✦ AI 优化当前提示词</button><div id="aiStatus" class="ai-status"></div><div class="guidance"><b>撰写提示</b><p>每个镜头优先写清“谁在做什么”，再补充机位、运动与光线。描述越具体，镜头意图越清楚。</p></div><a href="https://github.com/ZeroLu/awesome-seedance-2.5" target="_blank" rel="noopener noreferrer" class="source-link">参考 ZeroLu / awesome-seedance-2.5 ↗</a></div></aside>
+    </div>
+  </div>
+
+  <dialog id="modal" class="modal"><div class="modal-inner"><div class="modal-head"><div><span id="modalEyebrow" class="eyebrow"></span><h2 id="modalTitle"></h2></div><button id="modalClose" type="button" class="close-button" aria-label="关闭">×</button></div><div id="modalBody" class="modal-body"></div></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <input id="importInput" type="file" accept="application/json,.json" hidden />
+  <input id="caseImportInput" type="file" accept="application/json,.json" hidden />
+  <script type="module" src="/app-v2.js"></script>
+</body>
+</html>
